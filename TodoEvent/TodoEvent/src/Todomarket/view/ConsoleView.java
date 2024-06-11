@@ -54,12 +54,19 @@ public class ConsoleView {
 	}
 
 	//유저 정보 입력받기
-
-	public String UserInfo (){
+	//이름
+	public String username (){
+		System.out.println("이름을 입력해주세요 : ");
 		Scanner sc = new Scanner(System.in);
-		System.out.println("배송주소를 입력해주세요");
-		String address = sc.nextLine();
-		return address;
+		String name = sc.nextLine();
+		return name;
+	}
+	//폰번호
+	public String phonenumber(){
+		System.out.println("폰 번호 입력해주세요 : ");
+		Scanner sc = new Scanner(System.in);
+		String number = sc.nextLine();
+		return number;
 	}
 
 
@@ -78,10 +85,23 @@ public class ConsoleView {
 	}
 
 	public int inputDay() {
-
 		Scanner sc = new Scanner(System.in);
-		System.out.print("기한을 입력하세요 : ");
-		int day = sc.nextInt();
+		int day = -1;
+		boolean valid = false;
+
+		while (!valid) {
+			System.out.print("기한을 입력하세요: ");
+			try {
+				String input = sc.nextLine();
+				if (input.isEmpty()) {
+					throw new NumberFormatException("공백 입력은 허용되지 않습니다.");
+				}
+				day = Integer.parseInt(input); // 문자열을 정수로 변환
+				valid = true; // 변환이 성공하면 valid를 true로 설정하여 루프를 종료
+			} catch (NumberFormatException e) {
+				System.out.println("유효한 숫자를 입력하세요: " + e.getMessage());
+			}
+		}
 		return day;
 	}
 
@@ -137,22 +157,22 @@ public class ConsoleView {
 		System.out.println("===================");
 		System.out.println("상품 리스트");
 		for (int i = 0; i < mlist.marketList.size(); i++) {
-			System.out.println("[" + i + "] " + "[ " + mlist.marketList.get(i) + " ] ");
+			System.out.println("[" + i + "] " + "[ " + mlist.getEls(i) + " ] ");
 		}
 		System.out.println("===================");
 
 		int select = -1;
 		Boolean Really = false;
 
-		while (Really == false) {
+		while (Really != true) {
 			System.out.println("고르고 싶은 번호를 입력해주세요");
 			select = sc.nextInt();
 			if (select >= 0 && select < mlist.marketList.size()) {
-				Really = false;
+				Really = true;
 
 			} else {
 				System.out.println("잘못된 입력입니다 다시 입력하세요");
-				Really = true;
+				Really = false;
 			}
 		}
 		return select;
@@ -163,7 +183,7 @@ public class ConsoleView {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("관리자 비밀번호를 입력하세요: ");
 		String password = sc.nextLine();
-		return "admin123".equals(password); // 간단한 비밀번호 검증
+		return "123".equals(password); // 간단한 비밀번호 검증
 	}
 	//관리자 메뉴
 	public int selectAdminMenu() {
@@ -174,6 +194,53 @@ public class ConsoleView {
 		System.out.println("3. 아이템 삭제");
 		System.out.println("4. 종료");
 		return sc.nextInt();
+	}
+
+	//현재 아이템 리스트 (관리자)
+	public void displayItemList(MarketList mlist) {
+		System.out.println("현재 아이템 리스트:");
+		for (int i = 0; i < mlist.marketList.size(); i++) {
+			System.out.println("[" + i + "] " + mlist.marketList.get(i).toString());
+		}
+	}
+
+
+	// 현재 아이템 인덱스 입력 (관리자)
+	public int inputItemIndex() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("삭제할 아이템 인덱스를 입력하세요: ");
+		return sc.nextInt();
+	}
+
+	// 아이템 추가 (관리자)
+	public String inputItemName(){
+	  //현재 추가할 아이템 이름넣는 메서드
+		Scanner sc= new Scanner(System.in);
+		System.out.print("아이템 이름을 입력하세요: ");
+		String ItemaName = sc.nextLine();
+		return ItemaName;
+	}
+
+	//아이템 개수 설정(관리자)
+	public int inputItemStock(){
+		Scanner sc= new Scanner(System.in);
+		System.out.print("아이템 재고 수량을 입력하세요: ");
+		int ItemStock = sc.nextInt();
+		return ItemStock;
+	}
+
+	//아이템 포인트 설정(관리자)
+	public int inputItemPrice(){
+		Scanner sc= new Scanner(System.in);
+		System.out.print("아이템 가격을 입력하세요: ");
+		int ItemPrice = sc.nextInt();
+		return ItemPrice;
+	}
+
+	public String inputAddress(){
+		Scanner sc = new Scanner(System.in);
+		String address = sc.nextLine();
+		return address;
 	}
 
 }

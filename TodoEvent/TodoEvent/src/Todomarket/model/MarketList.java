@@ -10,4 +10,7 @@ public class MarketList {
         marketList.add(info);
     }
 
+    public String getEls(int i){
+        return this.marketList.get(i).toString();
+    }
 }
