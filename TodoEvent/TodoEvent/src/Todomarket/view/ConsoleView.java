@@ -99,7 +99,7 @@ public class ConsoleView {
 				day = Integer.parseInt(input); // 문자열을 정수로 변환
 				valid = true; // 변환이 성공하면 valid를 true로 설정하여 루프를 종료
 			} catch (NumberFormatException e) {
-				System.out.println("유효한 숫자를 입력하세요: " + e.getMessage());
+				System.out.println("유효한 숫자를 입력하세요");
 			}
 		}
 		return day;
@@ -111,7 +111,7 @@ public class ConsoleView {
 		Scanner sc = new Scanner(System.in);
 
 		for (int i = 0; i < list.todoList.size(); i++) {
-			System.out.print("고유번호 " + "[" + i + "] ");
+			System.out.print("번호" + "[" + i + "] ");
 			list.todoList.get(i).plusmethod();
 
 		}
@@ -125,8 +125,8 @@ public class ConsoleView {
 	// 할일 목록 보여주기
 	public void displayTodoInfo(MyList list) {
 		for (int i = 0; i < list.todoList.size(); i++) {
-			System.out.println(list.todoList.get(i).getDay());
-			System.out.println(list.todoList.get(i).getTodo());
+			System.out.println("[해야할 일 :"+  list.todoList.get(i).getTodo()+ "]" + "[기한:" + list.todoList.get(i).getDay() +"까지]");
+			System.out.println();
 		}
 	}
 
@@ -137,6 +137,7 @@ public class ConsoleView {
 
 		System.out.println("완료한 목록들");
 		for (int i = 0; i < list.completedList.size(); i++) {
+			System.out.print("["+ "번호 :" + i + "]");
 			list.completedList.get(i).pluscompletemethod();
 		}
 		System.out.println("삭제할 일의 번호를 입력하세요");
