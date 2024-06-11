@@ -187,10 +187,6 @@ public class TodoController {
 			System.out.println("배송지: " + address + "로 배송됩니다.");
 		}
 
-
-
-
-
 	}
 
 

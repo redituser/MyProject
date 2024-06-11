@@ -49,7 +49,7 @@ public class Iteminfo {
     }
 
     public String toString(){
-        return "포인트: " + itemPoint + "제품: "  + itemName +  "현재 남은 제품 "+ itemStock;
+        return "포인트:" + itemPoint +","+ "제품"  + itemName + "," + " 현재 남은 제품 "+ itemStock + "개";
     }
 
 }
